@@ -1,0 +1,62 @@
+﻿@model NewFactoryProject.Models.department
+
+@{ Layout = null;
+                NewFactoryProject.Models.DepartmentBL departmentBL = new NewFactoryProject.Models.DepartmentBL(); }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Show Departments</title>
+</head>
+<body>
+    <h1> Department Home Page </h1>
+    <h2>User: @Session["fullName"]</h2>
+    <h4 style=" color : blue">Number of Remaining Actions: @Session["numOfActions"]</h4>
+    <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Home", "../LogIn/HomePage")
+    </span>
+    <br />
+    <br />
+    <form action="/Department/Add" method="get">
+        <input type="submit" value="Add Department" />
+    </form>
+    <br />
+    <div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+<div style="color:red">
+    @ViewBag.ErrorMessage
+</div>}
+        <table border="1">
+            <tr>
+                
+                <th>Department</th>
+                <th>Manager Full Name</th>
+            </tr>
+            @foreach (var element in ViewBag.departmentManagers)
+            {
+<tr>
+    
+    <td>@element.Department</td>
+    <td>@element.FullName</td>
+    <td style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Edit", "Edit", new { id = @element.ID })  <br />
+        @if (departmentBL.DepartmentHasEmployees(element.ID, element.ManagerID) == false)
+        {
+@Html.ActionLink("Delete", "Delete", new { id = @element.ID })}
+    </td>
+</tr>
+       }
+        </table>
+    </div>
+    <br />
+    <br />
+    <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Log Out", "../LogIn/LogOut")
+    </span>
+</body>
+</html>
+
+

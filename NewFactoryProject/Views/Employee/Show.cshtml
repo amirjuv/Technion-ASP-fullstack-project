@@ -1,0 +1,129 @@
+﻿
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Show Employees Data</title>
+</head>
+<body>
+    <h1>Employees Home Page </h1>
+    <h2>User: @Session["fullName"]</h2>
+    <h4 style=" color : blue">Number of Remaining Actions: @Session["numOfActions"]</h4>
+    <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Home", "../LogIn/HomePage")
+    </span>
+    <br />
+    <br />
+    <div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+<div style="color:red">
+    @ViewBag.ErrorMessage
+</div>}
+        <form action="Search">
+            Search by First Name / Last Name / Department Name:
+            <input type="text" name="name" />
+            <input type="submit" value="Search" />
+        </form>
+        <br />
+        <table border="1">
+            <tr>
+
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Start Work Year</th>
+                <th>Department</th>
+                <th>Shift</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Edit Employee</th>
+                <th></th>
+                <th>Delete Employee Data</th>
+                <th></th>
+                <th>Add Shift</th>
+
+
+            </tr>
+            @{ int id = -1; }
+            @for (int i = 0; i < ViewBag.employeesData.Count; i++)
+            {
+        <tr>
+            @if (id != ViewBag.employeesData[i].ID)
+            {
+                id = ViewBag.employeesData[i].ID;
+
+
+                
+                <td>@ViewBag.employeesData[i].FirstName</td>
+                <td>@ViewBag.employeesData[i].LastName</td>
+                <td>@ViewBag.employeesData[i].StartWorkYear</td>
+                <td>@ViewBag.employeesData[i].DepartmentName</td>
+                }
+
+            <td>
+                <ul style="list-style: none;">
+                    @{ int beginIndex = i;
+                        int endIndex = i;
+                        for (; endIndex < ViewBag.employeesData.Count; endIndex++)
+                        {
+                            if (endIndex + 1 < ViewBag.employeesData.Count && ViewBag.employeesData[endIndex].ID != ViewBag.employeesData[endIndex + 1].ID)
+                            {
+        <li>@ViewBag.employeesData[endIndex].Date</li> i = endIndex;
+                                break;
+                            }
+                            else
+                            {
+        <li>@ViewBag.employeesData[endIndex].Date</li> }
+                        }
+
+                        if (endIndex >= ViewBag.employeesData.Count)
+                        {
+                            i = endIndex;
+                            endIndex = endIndex - 1;
+                        } }
+                </ul>
+            </td>
+            <td>
+                <ul style="list-style: none;">
+                    @{ for (int index = beginIndex; index <= endIndex; index++)
+                        {
+                            if (index < ViewBag.employeesData.Count)
+                            {
+        <li>@ViewBag.employeesData[index].StartTime</li> }
+                        } }
+                </ul>
+            </td>
+            <td>
+                <ul style="list-style: none;">
+                    @{ for (int index = beginIndex; index <= endIndex; index++)
+                        {
+                            if (index < ViewBag.employeesData.Count)
+                            {
+        <li>@ViewBag.employeesData[index].EndTime</li> }
+                        } }
+                </ul>
+            </td>
+            <td style="background-color:lightgray; padding: 1px 6px 1px 6px">
+                @Html.ActionLink("Edit Employee", "Edit", new { id = id }) <td />
+            <td style="background-color:lightgray; padding: 1px 6px 1px 6px">
+                @Html.ActionLink("Delete Employee Data", "Delete", new { id = id })  <td />
+            <td style="background-color:lightgray; padding: 1px 6px 1px 6px">
+                @Html.ActionLink("Add Shift", "Add", new { id = id })
+            </td>
+        </tr>
+       }
+
+
+        </table>
+        <br />
+        <br />
+        <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+            @Html.ActionLink("Log Out", "../LogIn/LogOut")
+        </span>
+    </div>
+</body>
+</html>
+

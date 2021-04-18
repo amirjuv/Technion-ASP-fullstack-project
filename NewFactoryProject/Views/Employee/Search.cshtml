@@ -1,0 +1,134 @@
+﻿
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search Employee</title>
+</head>
+<body>
+    <h1>Search Result :</h1>
+    <h2>User: @Session["fullName"]</h2>
+    <h4 style=" color : blue">Number of Remaining Actions: @Session["numOfActions"]</h4>
+    <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Home", "../LogIn/HomePage")
+    </span>
+    <br />
+    <div>
+        @if (ViewBag.FirstName != null)
+        {
+<h2>Results by First Name</h2>
+                <table border="1">
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Start Work Year</th>
+                        <th>Department ID</th>
+                        <th>Department Name</th>
+                        <th>Shift</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    @foreach (var name in ViewBag.FirstName)
+                    {
+    <tr>
+        <td>@name.ID</td>
+        <td>@name.FirstName</td>
+        <td>@name.LastName</td>
+        <td>@name.StartWorkYear</td>
+        <td>@name.DepartmentID</td>
+        <td>@name.DepartmentName</td>
+        <td>@name.Date</td>
+        <td>@name.StartTime</td>
+        <td>@name.EndTime</td>
+    </tr>
+       }
+                </table>
+                                <br />
+                                                <br />}
+
+        @if (ViewBag.LastName != null)
+        {
+<h2>Results by Last Name</h2>
+                <table border="1">
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Start Work Year</th>
+                        <th>Department ID</th>
+                        <th>Department Name</th>
+                        <th>Shift</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    @foreach (var name in ViewBag.LastName)
+                    {
+    <tr>
+        <td>@name.ID</td>
+        <td>@name.FirstName</td>
+        <td>@name.LastName</td>
+        <td>@name.StartWorkYear</td>
+        <td>@name.DepartmentID</td>
+        <td>@name.DepartmentName</td>
+        <td>@name.Date</td>
+        <td>@name.StartTime</td>
+        <td>@name.EndTime</td>
+    </tr>
+       }
+                </table>
+                                <br />
+                                                <br />}
+
+        @if (ViewBag.DepartmentName != null)
+        {
+<h2>Results by Department Name</h2>
+                <table border="1">
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Start Work Year</th>
+                        <th>Department ID</th>
+                        <th>Department Name</th>
+                        <th>Shift</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    @foreach (var name in ViewBag.DepartmentName)
+                    {
+    <tr>
+        <td>@name.ID</td>
+        <td>@name.FirstName</td>
+        <td>@name.LastName</td>
+        <td>@name.StartWorkYear</td>
+        <td>@name.DepartmentID</td>
+        <td>@name.DepartmentName</td>
+        <td>@name.Date</td>
+        <td>@name.StartTime</td>
+        <td>@name.EndTime</td>
+    </tr>
+       }
+                </table>
+                                <br />
+                                                <br />}
+
+        @if (ViewBag.DepartmentName == null && ViewBag.LastName == null && ViewBag.FirstName == null)
+        {
+<h2 style="color:red">No result has been found!</h2>}
+
+        <form action="/Employee/Show">
+            <input type="submit" name="Show" value="Back" />
+        </form>
+
+        <br />
+
+        <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+            @Html.ActionLink("Log Out", "../LogIn/LogOut")
+        </span>
+    </div>
+</body>
+</html>

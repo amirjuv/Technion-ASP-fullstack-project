@@ -1,0 +1,83 @@
+﻿@model NewFactoryProject.Models.EmployeesData
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Shift</title>
+</head>
+<body>
+    <h1>Add Shift </h1>
+    <h2>User: @Session["fullName"]</h2>
+    <h4 style=" color : blue">Number of Remaining Actions: @Session["numOfActions"]</h4>
+    <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Back", "../Employee/Show")
+    </span>
+    <br />
+    <div>
+        <h2>Employee Name: @ViewBag.AllEmloyeeShifts[0].FirstName @ViewBag.AllEmloyeeShifts[0].LastName</h2>
+        <br />
+        <form action="/Employee/AddShift" method="post">
+            @Html.HiddenFor(x => x.ID)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                    <br />
+                    Start Time @Html.TextBoxFor(x => x.StartTime)
+                    <br />
+                    End Time @Html.TextBoxFor(x => x.EndTime)
+                </div>
+            </div>
+            <input type="submit" value="Add" />
+        </form>
+        <br />
+        <br />
+        Current Employee Shifts:
+        <br />
+        <table border="1">
+            <tr>
+                <td>Date</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+            </tr>
+            @foreach (var element in @ViewBag.AllEmloyeeShifts)
+            {
+<tr>
+    <td>@element.Date</td>
+    <td>@element.StartTime</td>
+    <td>@element.EndTime</td>
+</tr>
+       }
+        </table>
+        <br />
+        <br />
+        All Available Shifts:
+        <br />
+        <table border="1">
+            <tr>
+                <td>Date</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+            </tr>
+            @foreach (var element in @ViewBag.AllShifts)
+            {
+<tr>
+    <td>@element.date</td>
+    <td>@element.start_time</td>
+    <td>@element.end_time</td>
+</tr>
+       }
+        </table>
+        <br />
+        <br />
+        <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+            @Html.ActionLink("Log Out", "../LogIn/LogOut")
+        </span>
+    </div>
+</body>
+</html>
+

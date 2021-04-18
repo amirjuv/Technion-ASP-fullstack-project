@@ -1,0 +1,39 @@
+﻿@model NewFactoryProject.Models.EmployeesData
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit Employee</title>
+</head>
+<body>
+    <h1>Edit Employee </h1>
+    <h2>User: @Session["fullName"]</h2>
+    <h4 style=" color : blue">Number of Remaining Actions: @Session["numOfActions"]</h4>
+    <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Back", "../Employee/Show")
+    </span>
+    <br />
+    <br />
+    <div>
+        <form action="/Employee/EditEmployee" method="post">
+            @Html.HiddenFor(x => x.ID)
+            First Name @Html.TextBoxFor(x => x.FirstName) <br />
+            Last Name @Html.TextBoxFor(x => x.LastName) <br />
+            Start Work Year @Html.TextBoxFor(x => x.StartWorkYear) <br />
+            Department  @Html.TextBoxFor(x => x.DepartmentName, new { @disabled = "disabled" }) <br />
+            @Html.DropDownListFor(x => x.DepartmentID, Model.Departments, "Select Department") <br />
+            <br />
+            <input type="submit" value="Update" />
+        </form>
+
+        <br />
+        <br />
+        <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+            @Html.ActionLink("Log Out", "../LogIn/LogOut")
+        </span>
+    </div>
+</body>
+</html>

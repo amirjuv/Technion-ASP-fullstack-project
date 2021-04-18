@@ -1,0 +1,70 @@
+﻿@model NewFactoryProject.Models.DepartmentManager
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Department</title>
+</head>
+<body>
+    <h1>Add Department </h1>
+    <h2>User: @Session["fullName"]</h2>
+    <h4 style=" color : blue">Number of Remaining Actions: @Session["numOfActions"]</h4>
+    <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Back", "../Department/Show")
+    </span>
+    <br />
+    <br />
+    <div>
+        <form action="/Department/AddDepartment" method="post">
+            @Html.HiddenFor(x => x.ID)
+            Department @Html.TextBoxFor(x => x.Department) <br /><br />
+            Add Manager accordingly from List of Employees by their ID: <br />
+            Manager @Html.TextBoxFor(x => x.ManagerID) <br />
+            <br />
+
+            <input type="submit" value="Add" />
+        </form>
+        <br />
+        List of Employees without Managers:
+        <br />
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+            </tr>
+            @foreach (var element in ViewBag.EmployeesThatAreNotManagers)
+            {
+<tr>
+    <td> @element.ID </td>
+    <td> @element.first_name @element.last_name </td>
+</tr>
+       }
+        </table>
+        <br />
+
+        List of All Employees including Managers:
+        <br />
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+            </tr>
+            @foreach (var element in ViewBag.Employees)
+            {
+<tr>
+    <td> @element.ID </td>
+    <td> @element.first_name @element.last_name </td>
+</tr>
+       }
+        </table>
+        <br />
+        <br />
+        <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+            @Html.ActionLink("Log Out", "../LogIn/LogOut")
+        </span>
+    </div>
+</body>
+</html>

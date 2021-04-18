@@ -1,0 +1,65 @@
+﻿
+@model NewFactoryProject.Models.EmployeesData
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Shift</title>
+</head>
+<body>
+    <h1>Add Shift</h1>
+    <h2>User: @Session["fullName"]</h2>
+    <h4 style=" color : blue">Number of Remaining Actions: @Session["numOfActions"]</h4>
+    <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Back", "../Shift/Show")
+    </span>
+    <br />
+    <br />
+    <div>
+        <form action="/Shift/AddShift" method="post">
+            @Html.HiddenFor(x => x.ID)
+            <div class="form-group">
+                @Html.LabelFor(x => x.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.Date, "", new { @class = "text-danger" })
+                    <br />
+                    Start Time @Html.TextBoxFor(x => x.StartTime)
+                    <br />
+                    End Time @Html.TextBoxFor(x => x.EndTime)
+                </div>
+            </div>
+            <br />
+            <input type="submit" value="Add" />
+        </form>
+        <br />
+        All Available Shifts:
+        <br />
+        <table border="1">
+            <tr>
+                <td>ID</td>
+                <td>Date</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+            </tr>
+            @foreach (var element in @ViewBag.AllShifts)
+            {
+        <tr>
+            <td>@element.ID</td>
+            <td>@element.date</td>
+            <td>@element.start_time</td>
+            <td>@element.end_time</td>
+        </tr>            }
+        </table>
+        <br />
+        <br />
+        <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+            @Html.ActionLink("Log Out", "../LogIn/LogOut")
+        </span>
+    </div>
+</body>
+</html>
+

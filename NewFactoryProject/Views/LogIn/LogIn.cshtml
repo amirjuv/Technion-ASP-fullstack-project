@@ -1,0 +1,42 @@
+﻿@model NewFactoryProject.Models.user
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LogIn</title>
+    <style>
+        #login-div {
+            position: absolute;
+            left: 40%;
+            top: 20%;
+            border: 1px solid #ccc;
+            padding: 10px 10px;
+            background-color:lightblue
+        }
+
+    </style>
+</head>
+<body>
+    <h1>LogIn Members Page</h1> <br />
+    <div id="login-div">
+        <h3 style="text-decoration : underline">Sign In</h3>
+        <form action="/LogIn/LogIn" method="post">
+            
+            Username : <br /><input type="text" name="username" /> <br />
+            Password : <br /><input type="password" name="password" /> <br /><br /><br />
+
+            <input type="submit" value="LogIn" />
+            <input type="reset" value="Clear" />
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+        <div style="color:red">
+            @ViewBag.ErrorMessage
+        </div>      }
+        </form>
+    </div>
+</body>
+</html>

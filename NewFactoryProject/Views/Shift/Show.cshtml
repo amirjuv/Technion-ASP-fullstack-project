@@ -1,0 +1,77 @@
+﻿
+
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Shift Page</title>
+</head>
+<body>
+    <h1>Shifts Home Page </h1>
+    <h2>User: @Session["fullName"]</h2>
+    <h4 style=" color : blue">Number of Remaining Actions: @Session["numOfActions"]</h4>
+    <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+        @Html.ActionLink("Home", "../LogIn/HomePage")
+    </span>
+    <br />
+    <br />
+    <form action="/Shift/Add" method="get">
+        <input type="submit" value="Add Shift" />
+    </form>
+    <br />
+    <div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color:red">
+                @ViewBag.ErrorMessage
+            </div>}
+        Shifts Table: <br />
+        <table border="1">
+            <tr>
+
+                <td>Shift Date</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+                <td>Employee</td>
+            </tr>
+            @for (int i = 0, j = 1; i < @ViewBag.ShiftsList.Count && j < @ViewBag.ShiftsList.Count; i++)
+            {
+                <tr>
+                    @{ bool isPresented = false;
+
+                        if (isPresented == false && @ViewBag.ShiftsList[i].ShiftID == @ViewBag.ShiftsList[j].ShiftID)
+                        {
+
+                            <td>@ViewBag.ShiftsList[i].Date</td>
+                            <td>@ViewBag.ShiftsList[i].StartTime</td>
+                            <td>@ViewBag.ShiftsList[i].EndTime</td>
+ isPresented = true;
+                        }
+
+                        <td style="background-color:lightgray; padding: 1px 6px 1px 6px">
+                            <ul style="list-style: none;">
+                                @do
+                                {
+                                    string fullName = @ViewBag.ShiftsList[j].FirstName + " " + @ViewBag.ShiftsList[j].LastName;
+                                    <li >@Html.ActionLink(fullName, "../Employee/Edit", new { id = @ViewBag.ShiftsList[j].ID })</li>
+j = j + 1;
+
+                                } while (j < @ViewBag.ShiftsList.Count && @ViewBag.ShiftsList[i].ShiftID == @ViewBag.ShiftsList[j].ShiftID);
+
+                            </ul>
+                        </td>
+ i = j; }
+                </tr>
+       }
+        </table>
+ 
+        <br />
+        <span style="background-color:lightgray; padding: 1px 6px 1px 6px">
+            @Html.ActionLink("Log Out", "../LogIn/LogOut")
+        </span>
+    </div>
+</body>
+</html>
