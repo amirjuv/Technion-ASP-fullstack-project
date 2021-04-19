@@ -76,7 +76,6 @@ C:\Users\Amir\source\repos\NewFactoryProject\NewFactoryProject\bin\System.Web.We
 C:\Users\Amir\source\repos\NewFactoryProject\NewFactoryProject\bin\Newtonsoft.Json.xml
 C:\Users\Amir\source\repos\NewFactoryProject\NewFactoryProject\bin\Antlr3.Runtime.pdb
 C:\Users\Amir\source\repos\NewFactoryProject\NewFactoryProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Amir\source\repos\NewFactoryProject\NewFactoryProject\obj\Debug\NewFactoryProject.csprojAssemblyReference.cache
 C:\Users\Amir\source\repos\NewFactoryProject\NewFactoryProject\obj\Debug\NewFactoryProject.csproj.CoreCompileInputs.cache
 C:\Users\Amir\source\repos\NewFactoryProject\NewFactoryProject\obj\Debug\NewFactoryProject.csproj.CopyComplete
 C:\Users\Amir\source\repos\NewFactoryProject\NewFactoryProject\obj\Debug\NewFactoryProject.dll

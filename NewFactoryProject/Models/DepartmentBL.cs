@@ -121,10 +121,8 @@ namespace NewFactoryProject.Models
             department dep = db.departments.Where(x => x.ID == departmentManager.ID).First();
             Nullable<int> currentManagerID = dep.manager;
 
-            if (dep.name.Equals("Unassigned Managers") == false && departmentManager.Department.Equals("Unassigned Managers") == false)
-            {
-                dep.name = departmentManager.Department;
-            }
+
+            dep.name = departmentManager.Department;
 
             if (count != 0)
             {
@@ -169,17 +167,7 @@ namespace NewFactoryProject.Models
         public void Delete(int id)
         {
             department department = db.departments.Where(x => x.ID == id).First();
-            /*
-            if(department.name.Equals("Unassigned Managers"))
-            {
-                return;
-            }
-
-            int unassignedManagersDepID = db.departments.Where(x => x.name == "Unassigned Managers").First().ID;
-
-            employee employee = db.employees.Where(x => x.ID == department.manager).First();
-            employee.departmentID = unassignedManagersDepID;
-            */
+           
             db.departments.Remove(department);
             db.SaveChanges();
         }

@@ -76,40 +76,6 @@ namespace NewFactoryProject.Models
             return db.employees.Where(x => x.ID == id).First();
         }
 
-
-       
-        public Dictionary<employee, List<shift>> GetAllEmployeesShift()
-        {
-            List<EmployeesData> employeeData = this.GetAllEmployeesData();
-            int id = -1;
-            Dictionary<employee, List<shift>> employeeShiftData = new Dictionary<employee, List<shift>>();
-            List<shift> employeeShift = null;
-
-            foreach (EmployeesData element in employeeData)
-            {
-                if (id == element.ID)
-                {
-
-                    employeeShift.Add(new shift { ID = element.ShiftID, date = element.Date, start_time = element.StartTime, end_time = element.EndTime });
-                }
-                else
-                {
-                    if (id != -1)
-                    {
-                        employeeShiftData.Add(this.GetEmployee(id), employeeShift);
-                    }
-
-                    employeeShift = new List<shift>();
-                    id = element.ID;
-
-                    employeeShift.Add(new shift { ID = element.ShiftID, date = element.Date, start_time = element.StartTime, end_time = element.EndTime });
-                }
-            }
-
-            return employeeShiftData;
-        }
-
-
         //Search Employee (By First Name):
         public List<EmployeesData> SearchByFirstName(string name)
         {
